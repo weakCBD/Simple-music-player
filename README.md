@@ -4,3 +4,5 @@
 
 ## API
 [网易云音乐API](https://autumnfish.cn/)
+## 预览地址
+[https://weakcbd.github.io/Simple-music-player/](https://weakcbd.github.io/Simple-music-player/)
