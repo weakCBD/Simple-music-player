@@ -1,0 +1,530 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+input {
+    border: 0;
+    outline: none;
+    background-color: transparent;
+}
+
+button {
+    border: 0;
+    outline: none;
+    background-color: transparent;
+}
+
+body {
+    background-color: #ccc;
+    font-size: 16px;
+    color: black;
+}
+
+#box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 600px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+#box .title {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: skyblue;
+    line-height: 50px;
+    padding: 0 10px;
+    z-index: 1;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#box .title h1 {
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    user-select: none;
+}
+
+#box .title .search {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 300px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, .3);
+    line-height: 30px;
+    overflow: hidden;
+}
+
+#box .title .search input[type='text'] {
+    position: absolute;
+    left: 15px;
+    width: 200px;
+    height: 30px;
+    color: white;
+}
+
+#box .title .search input[type='text']::placeholder {
+    color: #ccc;
+}
+
+#box .title .search input[type='button'] {
+    position: absolute;
+    right: 10px;
+    background-image: url(../media/搜索.png);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#box .title .search input[type='button']:hover {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+#box .contain {
+    width: 800px;
+    height: 500px;
+}
+
+.contain .song-list {
+    float: left;
+    width: 200px;
+    height: 500px;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.contain .song-list::-webkit-scrollbar {
+    width: 3px;
+    height: 1px;
+}
+
+.contain .song-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.contain .song-list li {
+    position: relative;
+    width: 180px;
+    height: 40px;
+    margin: 5px 0;
+    margin-left: 10px;
+    border-radius: 5px;
+    line-height: 40px;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.contain .song-list li:nth-child(2n) {
+    background-color: rgba(200, 200, 200, .3);
+}
+
+.contain .song-list li button[class='play-button'] {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 5px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: url(../media/播放.png) no-repeat;
+    background-size: 80%;
+    background-position: center center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.contain .song-list li span[class='song-name'] {
+    display: inline-block;
+    width: 120px;
+    margin-left: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.contain .song-list li span[class='song-name']:hover {
+    color: rgb(0, 183, 255);
+    text-decoration: underline;
+}
+
+.contain .song-list li button[class='mv'] {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 5px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: url(../media/视频.png) no-repeat;
+    background-size: 100% 80%;
+    background-position: center center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.contain .song-list li button[class='mv']:hover,
+.contain .song-list li button[class='play-button']:hover {
+    background-color: white;
+}
+
+.contain .content {
+    position: relative;
+    float: left;
+    width: 400px;
+    height: 500px;
+    border-right: 1px solid #ccc;
+    overflow: hidden;
+    user-select: none;
+}
+
+.content>img {
+    position: absolute;
+    left: 0;
+    top: -20px;
+    width: 400px;
+    height: 400px;
+    filter: blur(20px);
+}
+
+.content>h3 {
+    position: absolute;
+    left: 50%;
+    top: 350px;
+    transform: translate(-50%, 0);
+    font-size: 30px;
+    text-shadow: 0 0 10px white;
+}
+
+.content .pick {
+    position: absolute;
+    left: 50%;
+    width: 150px;
+    height: 50px;
+    transform-origin: left top;
+    z-index: 1;
+}
+
+.pick-startplay {
+    animation: turnPick 1s forwards;
+}
+
+.pick-stopplay {
+    animation: stopPick 1s forwards;
+}
+
+@keyframes turnPick {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(40deg);
+    }
+}
+
+@keyframes stopPick {
+    0% {
+        transform: rotate(40deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.pick .pick-head {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgb(200, 200, 200);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+}
+
+.pick .pick-head::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: black;
+}
+
+.pick .pick-head::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 5px;
+    background-color: rgb(162, 162, 162);
+    border-bottom-right-radius: 5px;
+    z-index: -1;
+    transform-origin: left;
+    transform: translate(14px, 10px) rotate(30deg);
+}
+
+.pick .pick-body {
+    position: absolute;
+    width: 60px;
+    height: 5px;
+    bottom: -6px;
+    left: 88px;
+    border-bottom-left-radius: 5px;
+    background-color: rgb(162, 162, 162);
+}
+
+.pick .pick-body::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 8px;
+    right: -10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background-color: rgb(200, 200, 200);
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+}
+
+.content .cd {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+
+.content .cd:hover {
+    box-shadow: 0 0 15px white;
+}
+
+.cd-startplay {
+    animation: turnCd 10s linear infinite;
+}
+
+@keyframes turnCd {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.cd .cd-bg {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.cd .cd-bg::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 1px solid #555;
+}
+
+.cd .cd-bg::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid #555;
+}
+
+.cd img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.cd .shadow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 20px solid transparent;
+    border-left: 100px solid rgba(255, 255, 255, .8);
+    border-right: 100px solid rgba(255, 255, 255, .8);
+    filter: blur(8px);
+}
+
+.content .loading {
+    display: none;
+    position: absolute;
+    top: 350px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 10px solid #ddd;
+    border-top: 10px solid #bbb;
+    animation: loading 1s infinite;
+}
+
+@keyframes loading {
+    100% {
+        transform: translate(-50%, 0) rotate(360deg);
+    }
+}
+
+.contain .comment {
+    float: left;
+    width: 200px;
+    height: 500px;
+}
+
+.comment h3 {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    user-select: none;
+    background-color: #859aa2;
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.comment ul {
+    width: 100%;
+    height: 460px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.comment ul::-webkit-scrollbar {
+    width: 3px;
+    height: 1px;
+}
+
+.comment ul::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.comment ul li {
+    width: 180px;
+    margin-left: 10px;
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.comment ul li:nth-child(2n) {
+    background-color: rgba(200, 200, 200, .3);
+}
+
+.comment ul li img {
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.comment ul li .user-name {
+    float: left;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 700;
+    border-bottom: 1px solid white;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-left: 1em;
+}
+
+.comment ul li .comment-content {
+    padding-left: 40px;
+}
+
+#box .player {
+    width: 800px;
+    height: 50px;
+    border-top: 1px solid #ccc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#box .player audio {
+    width: 100%;
+    height: 100%;
+}
+
+#box .video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #87ceeb;
+}
+
+#box .video .mask {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, .5);
+    z-index: -1;
+}
+
+#box .video video {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}

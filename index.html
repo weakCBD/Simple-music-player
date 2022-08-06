@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易音乐播放器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <div class="title">
+            <h1>Music</h1>
+            <div class="search">
+                <input type="text" v-model="keywords" @keyup.enter="search" placeholder="输入歌名">
+                <input type="button" @click="search">
+            </div>
+        </div>
+        <div class="contain">
+            <ul class="song-list">
+                <li v-for="(song,index) in songs">
+                    <button class="play-button" @click="playSong(index,true)"></button>
+                    <span class="song-name" @click="getDetail(index,true)">{{song.name}}</span>
+                    <button class="mv" v-if="song.mvid" @click="getDetail(index,false)"></button>
+                </li>
+            </ul>
+            <div class="content">
+                <img :src="detail.al.picUrl" alt="">
+                <div :class="pickClass">
+                    <div class="pick-head"></div>
+                    <div class="pick-body"></div>
+                </div>
+                <div :class="cdClass">
+                    <div class="cd-bg"></div>
+                    <div class="shadow"></div>
+                    <img :src="detail.al.picUrl" alt="">
+                </div>
+                <div class="loading" v-show="isLoading"></div>
+                <h3>{{detail.name}}</h3>
+            </div>
+            <div class="comment">
+                <h3>热门留言</h3>
+                <ul>
+                    <li v-for="comment in comments">
+                        <img :src="comment.user.avatarUrl" alt="">
+                        <p class="user-name">{{comment.user.nickname}}</p>
+                        <p class="comment-content">{{comment.content}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="player">
+            <audio :src="url.url" controls="controls" loop="loop" autoplay="autoplay" preload="auto" @play="startPlay"
+                @pause="stopPlay"></audio>
+        </div>
+        <div class="video" v-if="mvUrl">
+            <div class="mask" @click="clearMv"></div>
+            <video :src="mvUrl" autoplay="autoplay" loop="loop" controls="controls"></video>
+        </div>
+    </div>
+</body>
+
+</html>
